@@ -5,7 +5,7 @@ Come back soon for more updates!
 
 <h2>Projects</h2>
 
-<ul>[File Transfer App](#transfer)</ul>
+<ul>File Transfer App</ul>
 <ul>Django Hotel Website w/ Room Service Menu</ul>
 <ul>Django Checkbook Banking App</ul>
 <ul>University Class Tracker App</ul>
@@ -14,8 +14,8 @@ Come back soon for more updates!
 
 
 
-#transfer
-<h2>[File Transfer App](https://github.com/JAL212/Python_Projects/tree/main/fileTransferApp)</h2>
+
+<h2>File Transfer App</h2>
 
 <h3>Project Description</h3>
 <p>The File Transfer Application is a simple GUI tool that automates transferring files from one directory to another. It specifically moves files modified within the last 24 hours, ensuring only recent files are transferred.</p>
