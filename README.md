@@ -6,11 +6,10 @@ Come back soon for more updates!
 <h2>Projects</h2>
 
 <ul><a href="https://github.com/JAL212/Python_Projects/tree/main/fileTransferApp">File Transfer App</a></ul>
-<ul><a href="https://github.com/JAL212/Python_Projects/tree/main/fileTransferApp">Django Hotel Website w/ Room Service Menu</a></ul>
-<ul><a href="https://github.com/JAL212/Python_Projects/tree/main/fileTransferApp">Django Checkbook Banking App</a></ul>
-<ul><a href="https://github.com/JAL212/Python_Projects/tree/main/fileTransferApp">University Class Tracker App</a></ul>
-<ul><a href="https://github.com/JAL212/Python_Projects/tree/main/fileTransferApp">Student Tracker App</a></ul>
-<ul><a href="https://github.com/JAL212/Python_Projects/tree/main/fileTransferApp">Mythos: Text Based Adventure Game</a></ul>
+<ul><a href="https://github.com/JAL212/Python_Projects/tree/main/DjangoProject/src">Django Hotel Website w/ Room Service Menu</a></ul>
+<ul><a href="https://github.com/JAL212/Python_Projects/tree/main/Django_Checkbook_Project">Django Checkbook Banking App</a></ul>
+<ul><a href="https://github.com/JAL212/Python_Projects/tree/main/student_tracker">University Student Tracker App</a></ul>
+<ul><a href="https://github.com/JAL212/Python_Projects/tree/main/Text_Adventure_Game">Mythos: Text Based Adventure Game</a></ul>
 
 
 
