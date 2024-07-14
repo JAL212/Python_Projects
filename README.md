@@ -5,7 +5,7 @@ Come back soon for more updates!
 
 <h2>Projects</h2>
 
-<ul>File Transfer App</ul>
+<ul><a href="https://github.com/JAL212/Python_Projects/tree/main/fileTransferApp">File Transfer App</a></ul>
 <ul>Django Hotel Website w/ Room Service Menu</ul>
 <ul>Django Checkbook Banking App</ul>
 <ul>University Class Tracker App</ul>
