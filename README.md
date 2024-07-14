@@ -1,16 +1,16 @@
 # Python_Projects
-This repository contains my coding projects, made for the TechAcademy's Python Course
+This repository contains my Python-centric coding projects.
 
 Come back soon for more updates!
 
 <h2>Projects</h2>
 
 <ul><a href="https://github.com/JAL212/Python_Projects/tree/main/fileTransferApp">File Transfer App</a></ul>
-<ul>Django Hotel Website w/ Room Service Menu</ul>
-<ul>Django Checkbook Banking App</ul>
-<ul>University Class Tracker App</ul>
-<ul>Student Tracker App</ul>
-<ul>Mythos: Text Based Adventure Game</ul>
+<ul><a href="https://github.com/JAL212/Python_Projects/tree/main/fileTransferApp">Django Hotel Website w/ Room Service Menu</a></ul>
+<ul><a href="https://github.com/JAL212/Python_Projects/tree/main/fileTransferApp">Django Checkbook Banking App</a></ul>
+<ul><a href="https://github.com/JAL212/Python_Projects/tree/main/fileTransferApp">University Class Tracker App</a></ul>
+<ul><a href="https://github.com/JAL212/Python_Projects/tree/main/fileTransferApp">Student Tracker App</a></ul>
+<ul><a href="https://github.com/JAL212/Python_Projects/tree/main/fileTransferApp">Mythos: Text Based Adventure Game</a></ul>
 
 
 
