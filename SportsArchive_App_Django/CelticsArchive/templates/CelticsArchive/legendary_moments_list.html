@@ -1,0 +1,51 @@
+{% extends 'CelticsArchive/base.html' %}
+
+{% block content %}
+<div class="container">
+    <h1 style="text-align: center;">Legendary Celtics Moments</h1>
+    <form method="GET" action="{% url 'legendary_moments_list' %}" class="search-form">
+        <div class="form-group">
+            <label for="search">Search Archive</label>
+            <input type="text" id="search" name="search" value="{{ search_query }}" placeholder="Search by keyword (player, team, etc.)" class="form-control">
+        </div>
+        <div class="form-group">
+            <label for="start_date">Begin Date</label>
+            <input type="date" id="start_date" name="start_date" value="{{ start_date }}" class="form-control">
+        </div>
+        <div class="form-group">
+            <label for="end_date">End Date</label>
+            <input type="date" id="end_date" name="end_date" value="{{ end_date }}" class="form-control">
+        </div>
+        <button type="submit" class="search-button">Search</button>
+    </form>
+    <div class="legendary-moments-list">
+        {% for moment in moments %}
+        <div class="legendary-moment">
+            <h2><a href="{% url  'legendary_moment_detail' moment.id %}">{{ moment.title }}</a></h2>
+            <p>
+                {% if moment.boxscore_url %}
+                <a href="{{ moment.boxscore_url }}" target="_blank">{{ moment.date }}</a>
+                {% else %}
+                {{ moment.date }}
+                {% endif %}
+            </p>
+            <div class="description">
+                <p class="short-description">{{ moment.description|truncatewords:40 }}</p>
+                <p class="full-description" style="display:none;">{{ moment.description }}</p>
+                <button class="read-more" onclick="toggleDescription(this)">Read More</button>
+            </div>
+            {% if moment.video_url %}
+            <div class="video-container">
+                <iframe width="560" height="315" src="{{ moment.video_url }}" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+            </div>
+            {% endif %}
+        </div>
+        {% endfor %}
+    </div>
+    {% if moments.has_next %}
+    <div class="load-more-container">
+        <button id="load-more" class="load-more-button" data-page="1" onclick="loadMore()">Load More</button>
+    </div>
+    {% endif %}
+</div>
+{% endblock %}

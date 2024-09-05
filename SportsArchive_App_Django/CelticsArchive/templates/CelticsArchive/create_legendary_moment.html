@@ -1,0 +1,14 @@
+{% extends 'CelticsArchive/base.html' %}
+
+{% block content %}
+<div class="container">
+    <h1 style="text-align: center;">Add a Legendary Celtics Moment</h1>
+    <p style="text-align: center;"><i>Help create an Archive of memorable Celtics Plays, Players, and Moments, for all fans to explore.</i></p>
+    <hr class="styled-hr">
+    <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit">Save</button>
+    </form>
+</div>
+{% endblock %}

@@ -1,0 +1,469 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>{% block title %}The Boston Celtics Archive{% endblock %}</title>
+    {% load static %}
+    <link rel="stylesheet" type="text/css" href="{% static 'CelticsArchive/style.css' %}">
+    <style>
+        body {
+            background-image: url("{% static 'CelticsArchive/images/Russell.png' %}");
+            background-size: cover;
+            background-attachment: fixed;
+            font-family: Arial, sans-serif;
+        }
+        .floating-title {
+            position: absolute;
+            top: 75px; /* Adjust this value to move the title below the navbar */
+            left: 50%;
+            transform: translateX(-50%);
+            font-family: Arial Black, Arial, sans-serif;
+            color: white;
+            text-shadow:
+                -1px -1px 0 #007A33,
+                1px -1px 0 #007A33,
+                -1px 1px 0 #007A33,
+                1px 1px 0 #007A33,
+                -2px -2px 0 #007A33,
+                2px -2px 0 #007A33,
+                -2px 2px 0 #007A33,
+                2px 2px 0 #007A33; /* Create outline effect */
+            font-size: 3em;
+            text-align: center;
+            border: 4px solid #007A33;  /* Celtics Green */
+            padding: 10px 20px;
+            background-color: rgba(0, 0, 0, 0.5); /* Optional: Add a semi-transparent background for better readability */
+            z-index: 500; /* Ensure the title is above other elements */
+        }
+        nav {
+            background-color: white;
+            color: #007A33; /* Celtics Green */
+            padding: 10px;
+            border: 4px solid #007A33;
+            font-weight: bold;
+            position: fixed;
+            top: 0;
+            width: 100%;
+            z-index: 1000; /* Ensures the navbar is above other elements */
+        }
+        nav a {
+            color: #007A33; /* Celtics Green */
+            margin: 0 15px;
+            text-decoration: none;
+        }
+        nav a:hover {
+            text-decoration: underline;
+        }
+        .welcome-text {
+            margin: 190px auto 20px; /* Adjust the margin as needed */
+            width: 80%;
+            background-color: rgba(255, 255, 255, 0.8);
+            border: 6px solid #007A33; /* Celtics Green */
+            color: #007A33;
+            text-align: center;
+            padding: 10px;
+            font-size: 1.2em;
+            font-weight: bold;
+        }
+        .carousel-container {
+            position: relative;
+            margin: 20px auto; /* Adjust this value as needed for space between floating title and the carousel */
+            width: 93%;
+            overflow: hidden;
+            display: flex;
+            justify-content: left; /* Ensures first banner showing in the carousel is the first banner */
+            align-items: center;
+        }
+        .carousel-slide {
+            display: flex;
+            transition: transform 0.5s ease-in-out;
+        }
+        .carousel-item {
+            width: 200px; /* Fixed width */
+            height: 400px; /* Fixed height */
+            margin: 0 10px;
+            background-color: rgba(255, 255, 255, 0.8);
+            border: 10px solid #007A33; /* Celtics Green */
+            color: #007A33;
+            font-family: Arial Black, Arial, sans-serif;
+            text-align: center;
+            padding: 20px;
+            background: rgba(255, 255, 255, 0.7); /* Semi-transparent background */
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            height: 400px; /* Adjust height as needed */
+            transition: transform 0.6s;
+            transform-style: preserve-3d;
+            perspective: 1000px;
+        }
+        .carousel-item:hover {
+            transform: rotateY(180deg);
+        }
+        .carousel-item .front, .carousel-item .back {
+            position: absolute;
+            backface-visibility: hidden;
+        }
+        .carousel-item .back {
+            transform: rotateY(180deg);
+        }
+        .carousel-button {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background-color: #007A33; /* Celtics Green */
+            color: white;
+            border: none;
+            padding: 10px;
+            cursor: pointer;
+            font-size: 1.5em;
+            z-index: 1000;
+        }
+        .carousel-button.prev {
+            left: 0;
+        }
+        .carousel-button.next {
+            right: 0;
+        }
+        footer {
+            background-color: white;
+            color: #007A33;  /* Celtics Green */
+            text-align: center;
+            padding: 10px;
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+            border: 4px solid #007A33;
+            font-weight: bold;
+            z-index: 1000; /* Ensure the footer is above other elements */
+        }
+        h1, h2, h3, h4, h5, h6, p, a {
+            color: #007A33;  /* Celtics Green */
+            font-family: 'Arial Black', Arial, sans-serif;
+        }
+
+        .container {
+        margin: 200px auto 50px auto;
+        padding: 20px;
+        max-width: 1200px;
+        background-color: rgba(255, 255, 255, 0.9);
+        border: 12px solid #007A33; /* Celtics Green */
+        box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .container h1 {
+            text-align: center;
+            color: #007A33;
+        }
+
+        .container h2 {
+            color: #007A33; /* Celtics Green */
+            text-align: center;
+        }
+
+        .styled-hr {
+            border: 0;
+            height: 4px;
+            background-color: #007A33; /* Celtics Green */
+            margin-bottom: 20px; /* Adjust as needed */
+            margin-top: 20px; /* Adjust as needed */
+        }
+
+        .legendary-moments-list {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); /* Creates a responsive grid layout */
+            gap: 20px;
+        }
+
+        .legendary-moment {
+            background-color: rgba(255, 255, 255, 0.8);
+            border: 6px solid #007A33; /* Celtics Green */
+            padding: 20px;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+            text-align: center;
+        }
+
+        .legendary-moment h3 {
+            color: #007A33; /* Celtics Green */
+        }
+
+        .video-container {
+            margin-top: 20px;
+        }
+
+        .video-container iframe {
+            width: 100%;
+            height: 315px;
+            border-radius: 10px;
+        }
+
+        .detail-page-video iframe {
+            width: 100%;
+            height: 500px; /* Increase the height for detail page video */
+            border-radius: 10px;
+        }
+
+        form {
+            display: flex;
+            flex-direction: column;
+        }
+
+        form button {
+            background-color: #007A33; /* Celtics Green */
+            font-family: Arial Black, Arial, sans-serif;
+            color: white;
+            border: none;
+            padding: 10px;
+            margin-top: 20px;
+            cursor: pointer;
+            border-radius: 5px;
+        }
+
+        form button:hover {
+            background-color: #005a24;
+        }
+
+        .form-control {
+            margin-bottom: 15px;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        .description {
+            text-align: left;
+        }
+
+        .short-description {
+            margin-bottom: 10px;
+        }
+
+        .full-description {
+            display: none;
+            margin-bottom: 10px;
+        }
+
+        .read-more {
+            background-color: #007A33; /* Celtics Green */
+            color: white;
+            border: none;
+            padding: 5px 10px;
+            cursor: pointer;
+            border-radius: 5px;
+            font-size: 0.9em;
+        }
+
+        .read-more:hover {
+            background-color: #005a24;
+        }
+
+        .search-form {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 5px;
+            margin-bottom: 20px;
+            background-color: rgba(255, 255, 255, 0.8);
+            padding: 15px;
+            border: 6px solid #007A33;
+            border-radius: 10px;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .search-form .form-group {
+            flex: 1 1 30%;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .search-form label {
+            margin-bottom: 2px;
+            font-weight: bold;
+            color: #007A33; /* Celtics Green */
+        }
+
+        .search-form input[type="text"],
+        .search-form input[type="date"] {
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            font-size: 1em;
+        }
+
+        .search-button {
+            align-self: center;
+            padding: 10px 20px;
+            background-color: #007A33; /* Celtics Green */
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 1em;
+            margin-top: 5px;
+        }
+
+        .search-button:hover {
+            background-color: #005a24;
+        }
+
+        .metadata {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        .metadata p {
+            margin: 0 200px 0 200px;
+        }
+
+        .boxscore-link {
+            color: #007A33; /* Celtics Green */
+            font-weight: bold;
+            text-decoration: none;
+            padding: 5px 10px;
+            border: 2px solid #007A33;
+            border-radius: 5px;
+            background-color: white;
+            transition: background-color 0.3s ease, color 0.3s ease;
+        }
+
+        .boxscore-link:hover {
+            background-color: #007A33;
+            color: white;
+        }
+
+        .back-button {
+            display: inline-block;
+            margin-top: 20px;
+            padding: 10px 20px;
+            background-color: #007A33; /* Celtics Green */
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+            transition: background-color 0.3s ease;
+        }
+
+        .button-container {
+            display: flex;
+            justify-content: center; /* Centers the button horizontally */
+            margin-top: 20px; /* Adds some space above the button */
+        }
+
+        .back-button:hover {
+            background-color: #005a24;
+        }
+
+        .load-more-container {
+            display: flex;
+            justify-content: center; /* Centers the button horizontally */
+            margin-top: 20px; /* Adds some space above the button */
+        }
+
+        .load-more-button {
+            display: inline-block;
+            margin: 20px auto;
+            padding: 10px 20px;
+            background-color: #007A33; /* Celtics Green */
+            color: white;
+            text-decoration: none;
+            border: none;
+            border-radius: 5px;
+            font-size: 1em;
+            font-weight: bold;
+            text-align: center;
+            cursor: pointer;
+            transition: background-color 0.3s ease, color 0.3s ease;
+        }
+
+        .load-more-button:hover {
+            background-color: #005a24;
+            color: white;
+        }
+    </style>
+</head>
+<body>
+    <nav>
+        <a href="{% url 'CelticsArchive_home' %}">Home</a>
+        <a href="#">History</a>
+        <a href="#">Banners</a>
+        <a href="{% url 'legendary_moments_list' %}">Legendary Moments</a>
+        <a href="{% url 'create_legendary_moment' %}">Add a Legendary Moment</a>
+        <a href="#">About</a>
+    </nav>
+    <div class="floating-title">The Celtics Archive</div>
+    {% block content %}
+    {% endblock %}
+    <footer>
+       | &copy; 2024 | The Celtics Archives |
+    </footer>
+    <script>
+        function toggleDescription(button) {
+            var shortDescription = button.previousElementSibling.previousElementSibling;
+            var fullDescription = button.previousElementSibling;
+
+            if (fullDescription.style.display === "none") {
+                fullDescription.style.display = "block";
+                shortDescription.style.display = "none";
+                button.textContent = "Read Less";
+            } else {
+                fullDescription.style.display = "none";
+                shortDescription.style.display = "block";
+                button.textContent = "Read More";
+            }
+        }
+
+        function loadMore() {
+            const loadMoreButton = document.getElementById('load-more');
+            const nextPage = parseInt(loadMoreButton.dataset.page) + 1;
+            const searchParams = new URLSearchParams(window.location.search);
+            searchParams.set('page', nextPage);
+
+            fetch(`?${searchParams.toString()}`)
+                .then(response => response.text())
+                .then(data => {
+                    const parser = new DOMParser();
+                    const newDoc = parser.parseFromString(data, 'text/html');
+                    const newMoments = newDoc.querySelector('.legendary-moments-list').innerHTML;
+                    document.querySelector('.legendary-moments-list').innerHTML += newMoments;
+
+                    if (!newDoc.getElementById('load-more')) {
+                        loadMoreButton.remove();
+                    } else {
+                        loadMoreButton.dataset.page = nextPage;
+                    }
+                })
+                .catch(error => console.error('Error loading more moments:', error));
+        }
+
+        document.addEventListener('DOMContentLoaded', (event) => {
+            const prevButton = document.querySelector('.carousel-button.prev');
+            const nextButton = document.querySelector('.carousel-button.next');
+            const slide = document.querySelector('.carousel-slide');
+            const items = document.querySelectorAll('.carousel-item');
+            const itemWidth = items[0].clientWidth + 20; // Item width + margin
+
+            let currentIndex = 0;
+            const totalItems = items.length;
+
+            function showItem(index) {
+                slide.style.transition = 'transform 0.5s ease-in-out';
+                slide.style.transform = `translateX(${-itemWidth * index}px)`;
+            }
+
+            nextButton.addEventListener('click', () => {
+                currentIndex = (currentIndex + 1) % totalItems;
+                    showItem(currentIndex);
+            });
+
+            prevButton.addEventListener('click', () => {
+                currentIndex = (currentIndex - 1) % totalItems;
+                    showItem(currentIndex);
+            });
+
+            // Initial display
+            showItem(currentIndex);
+        });
+    </script>
+</body>
+</html>

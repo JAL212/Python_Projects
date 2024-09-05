@@ -1,0 +1,22 @@
+{% extends 'CelticsArchive/base.html' %}
+
+{% block content %}
+<div class="container">
+    <h1>{{ moment.title }}</h1>
+    <div class="metadata">
+        <p><strong>Date:</strong> {{ moment.date }}</p>
+        {% if moment.boxscore_url %}
+        <p><strong>Boxscore:</strong> <a href="{{ moment.boxscore_url }}" target="_blank">View Boxscore</a></p>
+        {% endif %}
+    </div>
+    <p><strong>Description:</strong> {{ moment.description }}</p>
+    {% if moment.video_url %}
+    <div class="video-container detail-page-video">
+        <iframe src="{{ moment.video_url }}" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+    </div>
+    {% endif %}
+    <div class="button-container">
+        <a href="{% url 'legendary_moments_list' %}" class="back-button">Back to All Moments</a>
+    </div>
+</div>
+{% endblock %}
